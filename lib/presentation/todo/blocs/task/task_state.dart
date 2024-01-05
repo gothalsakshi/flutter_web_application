@@ -11,7 +11,11 @@ final class AddTaskState extends TaskState{
   AddTaskState({required this.addingTask});
 }
 
-final class DeleteTaskState extends TaskState{}
+final class DeleteTaskState extends TaskState{
+  final List<TaskModel> list;
+
+  DeleteTaskState({required this.list});
+}
 
 final class AddedTaskState extends TaskState{
   final List<TaskModel> taskAddedLst;

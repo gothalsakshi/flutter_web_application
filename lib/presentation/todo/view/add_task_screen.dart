@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_application/presentation/todo/blocs/bloc/task_bloc.dart';
+import '../blocs/task/task_bloc.dart';
+
 
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({super.key});

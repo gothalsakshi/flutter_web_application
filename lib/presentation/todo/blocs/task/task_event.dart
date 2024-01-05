@@ -10,7 +10,11 @@ class AddTaskEvent extends TaskEvent{
   AddTaskEvent(this.task);
 }
 
-class DeleteTaskEvent extends TaskEvent{}
+class DeleteTaskEvent extends TaskEvent{
+  final int selectedIndex;
+
+  DeleteTaskEvent(this.selectedIndex);
+}
 
 class AddedTaskEvent extends TaskEvent{
   final List<TaskModel> taskAddedLst;
@@ -25,6 +29,4 @@ class UpdateListItemEvent extends TaskEvent {
     required this.updateTaskModel,
     required this.index
   });
-
-
 }

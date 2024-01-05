@@ -6,6 +6,7 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<TaskModel> taskList = [];
+  List<TaskModel> completedTaskList = [];
   TextEditingController task = TextEditingController();
   TaskBloc() : super(TaskInitial()) {
     on<AddTaskEvent>((event, emit) {
@@ -26,6 +27,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       // }
       
     });
+
+    on<DeleteTaskEvent>((event, emit){
+      taskList.removeAt(event.selectedIndex);  
+      debugPrint("calling remove function--->${taskList.length} ");
+      emit(DeleteTaskState(list: taskList));
+      // emit(UpdateListItemState(taskList)); 
+    }); 
   }
 
   @override
