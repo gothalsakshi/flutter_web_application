@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_application/presentation/features/bottom_navigation_bar/bloc/bottom_navigation_bloc.dart';
+import 'package:flutter_web_application/presentation/todo/blocs/navigation_bar_bloc/navigation_bar_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/blocs/task/task_bloc.dart';
-import 'package:flutter_web_application/presentation/todo/view/show_list_screen.dart';
+import 'package:flutter_web_application/presentation/todo/view/bottom_bar_screen.dart';
 import 'presentation/features/bottom_navigation_bar/cubit/bottom_navigation_bar_cubit.dart';
 
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<BottomNavigationBloc>(create: (ctx) => BottomNavigationBloc()),
         BlocProvider<BottomNavigationBarCubit>(create: (ctx) => BottomNavigationBarCubit()),
-        BlocProvider<TaskBloc>(create: (ctx)=> TaskBloc())
+        BlocProvider<TaskBloc>(create: (ctx)=> TaskBloc()),
+        BlocProvider<NavigationBarBloc>(create: (ctx)=> NavigationBarBloc())
       ],
       // create: (context) => BottomNavigationBarCubit(),
       child: MaterialApp(
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const ShowListScreen(),
+        home: const BottomBarScreen(),
       ),
     );
   }
