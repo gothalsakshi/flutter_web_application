@@ -32,8 +32,8 @@ final class UpdateListItemState extends TaskState{
 
 final class CompletedTaskState extends TaskState{
   final List<TaskModel> completedTaskList;
-  final int index;
+  // final int index;
 
-  CompletedTaskState(this.completedTaskList, this.index);
+  CompletedTaskState(this.completedTaskList,);
 
 }

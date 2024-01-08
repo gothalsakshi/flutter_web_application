@@ -32,10 +32,10 @@ class UpdateListItemEvent extends TaskEvent {
 }
 
 class CompletedTasKEvent extends TaskEvent {
-  final List<TaskModel> completedTaskList;
-  final int index;
-  CompletedTasKEvent({
-    required this.completedTaskList,
-    required this.index
-  });
+  // final List<TaskModel> completedTaskList;
+  // final int index;
+  // CompletedTasKEvent({
+  //   required this.completedTaskList,
+  //   required this.index
+  // });
 }

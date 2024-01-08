@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_web_application/presentation/todo/blocs/task/task_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/view/completed_task_scren.dart';
 import 'package:flutter_web_application/presentation/todo/view/task_screen.dart';
 
@@ -15,6 +16,9 @@ class BottomBarScreen extends StatelessWidget {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
                   onTap: (int tappedIndex) {
+                    if(tappedIndex == 1){
+                      BlocProvider.of<TaskBloc>(context).add(CompletedTasKEvent());
+                    }
                     BlocProvider.of<NavigationBarBloc>(context)
                         .add(ChangedNavigationBarEvent(currentIndex: tappedIndex));
                   },

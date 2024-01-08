@@ -23,13 +23,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       
       emit(DeleteTaskState(list: taskList));
       emit(UpdateListItemState(completedTaskList));
+      // emit(CompletedTaskState(completedTaskList,event.index));
       emit(AddedTaskState(taskAddedLst: taskList));
-      
-      // if(event.updateTaskModel.isCompleted == false){
-      //   emit(UpdateListItemState(TaskModel(task: task.text, isCompleted: true)));
-      // }else{
-      //   emit(UpdateListItemState(TaskModel(task: task.text, isCompleted: false)));
-      // }
       
     });
 
@@ -41,8 +36,14 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }); 
 
     on<CompletedTasKEvent>((event, emit){
-      completedTaskList.add(TaskModel(task: taskList[event.index].task, isCompleted: taskList[event.index].isCompleted));
-      emit(CompletedTaskState(completedTaskList,event.index));
+      taskList.forEach((element) { 
+        if(element.isCompleted == true){
+          completedTaskList.add(element);
+          debugPrint('completed task list --->${element.toString()}');
+        }
+      });
+      // completedTaskList.add(TaskModel(task: taskList[event.index].task, isCompleted: taskList[event.index].isCompleted));
+      emit(CompletedTaskState(completedTaskList));
     });
   }
 
