@@ -4,62 +4,53 @@ import 'package:flutter_web_application/presentation/todo/blocs/task/task_bloc.d
 import 'package:flutter_web_application/presentation/todo/model/task_model.dart';
 import 'package:flutter_web_application/presentation/todo/view/add_task_screen.dart';
 
-
-class TaskScreen extends StatelessWidget {
+class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
 
+  @override
+  State<TaskScreen> createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
+        List<Task> taskList = state.allTasks;
         return Scaffold(
-          
-          floatingActionButton: FloatingActionButton(
-            child:  const Icon(Icons.add),
-            onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (ctx) => const AddTaskScreen()));
-          }),
-          body: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: state is AddedTaskState
-                  ? ListView.builder(
-                      itemCount: state.taskAddedLst.length,
-                      itemBuilder: (ctx, index) {
-                        return ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          trailing: InkWell(
-                              onTap: () {
-                                BlocProvider.of<TaskBloc>(context)
-                                    .add(DeleteTaskEvent(index));
-                              },
-                              child: const Icon(Icons.delete)),
-                          // tileColor: Colors.amber,
-                          leading: Checkbox(
-                              value: state.taskAddedLst[index].isCompleted,
-                              onChanged: (val) {
-                                debugPrint("value of val--->${val.toString()}");
-                                // if(state is UpdateListItemState){
-                                BlocProvider.of<TaskBloc>(context).add(
-                                    UpdateListItemEvent(
-                                        updateTaskModel: TaskModel(
-                                            task:
-                                                state.taskAddedLst[index].task,
-                                            isCompleted: val!),
-                                        index: index));
-                                // }
-                                // state.taskAddedLst[index].isCompleted  != state.taskAddedLst[index].isCompleted;
-                                debugPrint(
-                                    'list item bool--->${state.taskAddedLst[index].isCompleted}');
-                              }),
-                          title: Text(state.taskAddedLst[index].task),
-                        );
-                      })
-                      : const Center(
-                          child: Text("No More Task###"),
-                        )),
-        );
+            floatingActionButton: FloatingActionButton(onPressed: () {
+              addTask();
+            }),
+            body: ListView.builder(
+                itemCount: taskList.length,
+                itemBuilder: (ctx, index) {
+                  var task = taskList[index];
+                  return ListTile(
+                    title: Text(taskList[index].task),
+                    trailing: Checkbox(
+                        value: task.isDone, 
+                        onChanged: (val) {
+                          BlocProvider.of<TaskBloc>(context)
+                          .add(UpdateTaskEvent(task: task));
+                        }),
+                  );
+                }));
       },
     );
+  }
+
+  void addTask() {
+    showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: const AddTaskScreen(),
+            ),
+          );
+        });
   }
 }

@@ -1,39 +1,34 @@
 part of 'task_bloc.dart';
 
-@immutable
-sealed class TaskState {}
-
-final class TaskInitial extends TaskState {}
-
-final class AddTaskState extends TaskState{
-  final TaskModel addingTask;
-
-  AddTaskState({required this.addingTask});
+class TaskState extends Equatable{
+  final List<Task> allTasks;
+  const TaskState({
+    this.allTasks = const <Task>[]
+  });
+  @override
+  List<Object?> get props => [allTasks];
 }
 
-final class DeleteTaskState extends TaskState{
-  final List<TaskModel> list;
+class AddTaskState extends TaskState{
+  final Task task;
+  const AddTaskState({required this.task});
 
-  DeleteTaskState({required this.list});
+  @override
+  List<Object?> get props => [task];
 }
 
-final class AddedTaskState extends TaskState{
-  final List<TaskModel> taskAddedLst;
+class UpdateTaskState extends TaskState{
+  final Task task;
+  const UpdateTaskState({required this.task});
 
-  AddedTaskState({required this.taskAddedLst}); 
+  @override
+  List<Object?> get props => [task];
 }
 
-final class UpdateListItemState extends TaskState{
-  final List<TaskModel> taskModel;
+class DeleteTaskState extends TaskState{
+  final Task task;
+  const DeleteTaskState({required this.task});
 
-  UpdateListItemState(this.taskModel);
-}
-
-
-final class CompletedTaskState extends TaskState{
-  final List<TaskModel> completedTaskList;
-  // final int index;
-
-  CompletedTaskState(this.completedTaskList,);
-
+  @override
+  List<Object?> get props => [task];
 }
