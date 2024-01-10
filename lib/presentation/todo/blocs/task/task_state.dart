@@ -32,3 +32,9 @@ class DeleteTaskState extends TaskState{
   @override
   List<Object?> get props => [task];
 }
+
+class EditTaskState extends TaskState{
+  final Task task;
+
+  const EditTaskState({super.allTasks, required this.task});
+}
