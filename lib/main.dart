@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_application/presentation/features/bottom_navigation_bar/bloc/bottom_navigation_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/blocs/navigation_bar_bloc/navigation_bar_bloc.dart';
-import 'package:flutter_web_application/presentation/todo/blocs/task/task_bloc.dart';
+import 'package:flutter_web_application/presentation/todo/blocs/switch_bloc/switch_bloc.dart';
+import 'package:flutter_web_application/presentation/todo/blocs/task_bloc/task_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/view/routes.dart';
 import 'package:flutter_web_application/presentation/todo/view/task_screen.dart';
 import 'presentation/features/bottom_navigation_bar/cubit/bottom_navigation_bar_cubit.dart';
@@ -24,18 +25,22 @@ class MyApp extends StatelessWidget {
         BlocProvider<BottomNavigationBarCubit>(
             create: (ctx) => BottomNavigationBarCubit()),
         BlocProvider<NavigationBarBloc>(create: (ctx) => NavigationBarBloc()),
-        BlocProvider<TaskBloc>(create: (ctx) => TaskBloc())
+        BlocProvider<TaskBloc>(create: (ctx) => TaskBloc()),
+        BlocProvider<SwitchBloc>(create: (ctx) => SwitchBloc())
         // BlocProvider(create: TaskBloc()..add(AddTaskEvent(task: Task(task: 'Task 1'))))
       ],
       // create: (context) => BottomNavigationBarCubit(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const TaskScreen(),
-        onGenerateRoute: appRouter.onGenerateRoute,
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return MaterialApp(
+            // darkTheme: state.switchValue ? ThemeData.dark() : ThemeData.light(),
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: state.switchValue ? ThemeData.dark() : ThemeData.light(),
+            home: const TaskScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }

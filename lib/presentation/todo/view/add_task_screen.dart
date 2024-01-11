@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/model/task_model.dart';
-import '../blocs/task/task_bloc.dart';
+import '../blocs/task_bloc/task_bloc.dart';
 
 class AddTaskScreen extends StatelessWidget {
   
@@ -10,7 +10,7 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
-    return Container(
+    return SizedBox(
       child: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Column(
