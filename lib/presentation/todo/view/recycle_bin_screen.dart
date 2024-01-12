@@ -39,8 +39,8 @@ class RecycleBinScreen extends StatelessWidget {
                       ),
                       leading: IconButton(
                           onPressed: () {
-                            BlocProvider.of<TaskBloc>(context)
-                                .add(EditTaskEvent(task: task));
+                            // BlocProvider.of<TaskBloc>(context)
+                            //     .add(EditTaskEvent(task: task));
                           },
                           icon: const Icon(Icons.edit)),
                       onLongPress: () {

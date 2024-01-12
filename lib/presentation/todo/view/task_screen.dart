@@ -4,6 +4,7 @@ import 'package:flutter_web_application/presentation/todo/blocs/switch_bloc/swit
 import 'package:flutter_web_application/presentation/todo/blocs/task_bloc/task_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/model/task_model.dart';
 import 'package:flutter_web_application/presentation/todo/view/add_task_screen.dart';
+import 'package:flutter_web_application/presentation/todo/view/edit_task_screen.dart';
 import 'package:flutter_web_application/presentation/todo/view/recycle_bin_screen.dart';
 
 class TaskScreen extends StatefulWidget {
@@ -86,7 +87,7 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(onPressed: () {
-              addTask('');
+              addTask();
             }),
             body: SingleChildScrollView(
               child: Column(
@@ -99,7 +100,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         var task = taskList[index];
                         return ListTile(
                           onTap: () {
-                            addTask(task.task);
+                            // addTask(task.task);
                           },
                           title: Text(
                             taskList[index].task,
@@ -110,8 +111,7 @@ class _TaskScreenState extends State<TaskScreen> {
                           ),
                           leading: IconButton(
                               onPressed: () {
-                                BlocProvider.of<TaskBloc>(context)
-                                    .add(EditTaskEvent(task: task));
+                                editTask(task);
                               },
                               icon: const Icon(Icons.edit)),
                           onLongPress: () {
@@ -138,7 +138,7 @@ class _TaskScreenState extends State<TaskScreen> {
     );
   }
 
-  void addTask(String? task) {
+  void addTask() {
     showModalBottomSheet(
         context: context,
         builder: (ctx) {
@@ -148,6 +148,21 @@ class _TaskScreenState extends State<TaskScreen> {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: const AddTaskScreen(),
+            ),
+          );
+        });
+  }
+
+  void editTask(Task task) {
+    showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: EditTaskScreen(oldTask: task),
             ),
           );
         });

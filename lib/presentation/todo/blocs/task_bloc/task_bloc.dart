@@ -33,10 +33,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       removedTask: List.from(state.removedTask)..remove(event.task)));
     });
 
-    // on<EditTaskEvent>((event, emit){
-    //   final state = this.state;
-    //   emit(TaskState(allTasks: List.from(state.allTasks)..);
-    // });
+    on<EditTaskEvent>((event, emit){
+      final state = this.state;
+      emit(TaskState(
+        allTasks: List.from(state.allTasks)..remove(event.oldTask)..insert(0, event.newTask),
+        removedTask: List.from(state.removedTask)));
+    });
 
     on<RemoveTaskEvent>((event, emit) {
       final state = this.state;

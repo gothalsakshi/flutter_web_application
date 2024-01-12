@@ -41,9 +41,13 @@ class RemoveTaskEvent extends TaskEvent{
 }
 
 class EditTaskEvent extends TaskEvent{
-  final Task task;
+  final Task oldTask;
+  final Task newTask;
 
-  const EditTaskEvent({required this.task});
+  const EditTaskEvent({required this.oldTask, required this.newTask});
+
+   @override
+  List<Object> get props => [oldTask,newTask];
 }
 
 class ChangeThemeEvent extends TaskEvent{
