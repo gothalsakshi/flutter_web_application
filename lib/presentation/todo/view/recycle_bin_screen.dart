@@ -50,8 +50,8 @@ class RecycleBinScreen extends StatelessWidget {
                       trailing: Checkbox(
                           value: task.isDone,
                           onChanged: (val) {
-                            BlocProvider.of<TaskBloc>(context)
-                                .add(UpdateTaskEvent(task: task));
+                            // BlocProvider.of<TaskBloc>(context)
+                            //     .add(UpdateTaskEvent(task: task));
                           }),
                     );
                   }),
