@@ -1,10 +1,11 @@
-import 'package:bloc/bloc.dart';
+// import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_web_application/presentation/todo/model/task_model.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'task_event.dart';
 part 'task_state.dart';
 
-class TaskBloc extends Bloc<TaskEvent, TaskState> {
+class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   TaskBloc() : super(const TaskState()) {
     bool theme = false;
     on<AddTaskEvent>((event, emit) {
@@ -52,5 +53,15 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       theme != theme;
       emit(ChangeThemeState(theme: theme));
     });
+  }
+  
+  @override
+  TaskState? fromJson(Map<String, dynamic> json) {
+    return TaskState.fromMap(json);
+  }
+  
+  @override
+  Map<String, dynamic>? toJson(TaskState state) {
+    return state.toMap();
   }
 }

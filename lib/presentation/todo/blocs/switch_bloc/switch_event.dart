@@ -1,6 +1,6 @@
 part of 'switch_bloc.dart';
 
-sealed class SwitchEvent extends Equatable {
+abstract class SwitchEvent extends Equatable {
   const SwitchEvent();
 
   @override

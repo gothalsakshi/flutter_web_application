@@ -17,6 +17,7 @@ class TaskScreen extends StatefulWidget {
 class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
+    final list = ['1st Trimester', '2nd Trimester', '3rd Trimester'];
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
         List<Task> taskList = state.allTasks;
@@ -131,6 +132,54 @@ class _TaskScreenState extends State<TaskScreen> {
                               }),
                         );
                       }),
+                  Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xff21215d)),
+                    child: Center(
+                      child: DropdownButton(
+                          dropdownColor: Color(0xff21215d),
+                          borderRadius: BorderRadius.circular(15),
+                          focusColor: Color(0xff21215d),
+                          isDense: true,
+                          alignment: Alignment.center,
+                          icon: Icon(
+                            Icons.check_circle_outline,
+                            color: Colors.green,
+                          ),
+                          hint: Text('1st Trimester'),
+                          items: <String>[
+                            '1st Trimester',
+                            '2nd Trimester',
+                            '3rd Trimester',
+                          ].map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 20),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 20),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.check_circle_outline,
+                                      color: Colors.green,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (val) {}),
+                    ),
+                  )
                 ],
               ),
             ));
