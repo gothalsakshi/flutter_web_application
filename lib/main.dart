@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_application/presentation/features/bottom_navigation_bar/bloc/bottom_navigation_bloc.dart';
 import 'package:flutter_web_application/presentation/form_validation/form_validation_bloc/form_validation_bloc.dart';
+import 'package:flutter_web_application/presentation/tabbar/screen/tabbar_screen.dart';
+import 'package:flutter_web_application/presentation/tabbar/tabbar_bloc/tabbar_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/blocs/navigation_bar_bloc/navigation_bar_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/blocs/switch_bloc/switch_bloc.dart';
 import 'package:flutter_web_application/presentation/todo/blocs/task_bloc/task_bloc.dart';
@@ -34,7 +36,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<NavigationBarBloc>(create: (ctx) => NavigationBarBloc()),
         BlocProvider<TaskBloc>(create: (ctx) => TaskBloc()),
         BlocProvider<SwitchBloc>(create: (ctx) => SwitchBloc()),
-        BlocProvider<FormValidationBloc>(create: (ctx) => FormValidationBloc())
+        BlocProvider<FormValidationBloc>(create: (ctx) => FormValidationBloc()),
+        BlocProvider<TabbarBloc>(create: (ctx)=> TabbarBloc())
         // BlocProvider(create: TaskBloc()..add(AddTaskEvent(task: Task(task: 'Task 1'))))
       ],
       // create: (context) => BottomNavigationBarCubit(),
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: state.switchValue ? ThemeData.dark() : ThemeData.light(),
-            home: const LoginScreen(),
+            home: const TabBarScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

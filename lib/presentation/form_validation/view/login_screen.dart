@@ -46,7 +46,10 @@ class LoginScreen extends StatelessWidget with ValidationMixin {
                   const SizedBox(height: 40),
                   state is OnSubmitState ? 
                   Text(state.successMsg):
-                  const SizedBox()
+                  const SizedBox(),
+                  // BlocSelector<FormValidationBloc, FormValidationState,String>(
+                  //   selector: (FormValidationState state)=> , 
+                  //   builder: builder)
                 ],
               ),
             ),
